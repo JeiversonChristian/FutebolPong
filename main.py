@@ -8,14 +8,16 @@ title = pygame.display.set_caption("Futebol Pong")
 field = pygame.image.load("assets/field.png")
 player1 = pygame.image.load("assets/player1.png")
 player2 = pygame.image.load("assets/player2.png")
-ball = pygame.image.load("assets/ball.png")
 
+ball = pygame.image.load("assets/ball.png")
+ball_x = 657
+ball_y = 327
 
 def draw():
     window.blit(field, (0,0))
     window.blit(player1, (50, 280))
     window.blit(player2, (1235, 280))
-    window.blit(ball, (657, 327))
+    window.blit(ball, (ball_x, ball_y))
 
 loop = True
 while loop == True:
