@@ -13,6 +13,12 @@ ball = pygame.image.load("assets/ball.png")
 ball_x = 657
 ball_y = 327
 
+def move_ball():
+    global ball_x
+    global ball_y
+
+    ball_x += 1
+
 def draw():
     window.blit(field, (0,0))
     window.blit(player1, (50, 280))
@@ -27,5 +33,6 @@ while loop == True:
             loop = False
 
     draw()
+    move_ball()
 
     pygame.display.update()
