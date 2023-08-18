@@ -33,8 +33,16 @@ loop = True
 while loop == True:
 
     for events in pygame.event.get():
+
         if events.type == pygame.QUIT:
             loop = False
+
+        # keyboard (teclado)
+        if events.type == pygame.KEYDOWN:
+            if events.key == pygame.K_w:
+                player1_y -= 10
+            if events.key == pygame.K_s:
+                player1_y += 10
 
     draw()
     move_ball()
