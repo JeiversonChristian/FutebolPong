@@ -8,16 +8,20 @@ title = pygame.display.set_caption("Futebol Pong")
 field = pygame.image.load("assets/field.png")
 
 player1 = pygame.image.load("assets/player1.png")
+player1_x = 50
 player1_y = 280
 player1_moveup = False
 player1_movedown = False
 
 player2 = pygame.image.load("assets/player2.png")
+player2_x = 1235
 player2_y = 280
 
 ball = pygame.image.load("assets/ball.png")
 ball_x = 657
 ball_y = 327
+ball_dir = 1
+ball_vel = 10
 
 def move_player():
     global player1_y
@@ -36,13 +40,22 @@ def move_player():
 def move_ball():
     global ball_x
     global ball_y
+    global ball_dir
 
-    ball_x += 1
+    if ball_x + ball.get_width() >= player2_x:
+        if ball_y >= player2_y and ball_y <= player2_y + player2.get_height():
+            ball_dir *= -1
+    
+    if ball_x <= player1_x + player1.get_width():
+        if ball_y >= player1_y and ball_y <= player1_y + player2.get_height():
+            ball_dir *= -1
+    
+    ball_x += ball_vel*ball_dir
 
 def draw():
     window.blit(field, (0,0))
-    window.blit(player1, (50, player1_y))
-    window.blit(player2, (1235, player2_y))
+    window.blit(player1, (player1_x, player1_y))
+    window.blit(player2, (player2_x, player2_y))
     window.blit(ball, (ball_x, ball_y))
 
 loop = True
