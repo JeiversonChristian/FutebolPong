@@ -23,10 +23,14 @@ def move_player():
     global player1_y
 
     if player1_moveup == True:
-        player1_y -= 5
+        player1_y -= 10
+        if player1_y < 0:
+            player1_y = 0
 
     if player1_movedown == True:
-        player1_y += 5
+        player1_y += 10
+        if player1_y + player1.get_height() > 700:
+            player1_y = 700 - player1.get_height()
 
 
 def move_ball():
