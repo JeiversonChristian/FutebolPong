@@ -5,6 +5,8 @@ pygame.init()
 window = pygame.display.set_mode([1360,700])
 title = pygame.display.set_caption("Futebol Pong")
 
+win_img = pygame.image.load("assets/win.png")
+
 score1 = 0
 score1_img = pygame.image.load("assets/score/0.png")
 score2 = 0
@@ -70,11 +72,13 @@ def move_ball():
 
     if ball_x + ball.get_width() <= 0:
         score2 += 1
-        score2_img = pygame.image.load("assets/score/"+str(score2)+".png")
+        if score2 <= 9:
+            score2_img = pygame.image.load("assets/score/"+str(score2)+".png")
     
     if ball_x >= 1360:
         score1 += 1
-        score1_img = pygame.image.load("assets/score/"+str(score1)+".png")
+        if score1 <= 9:
+            score1_img = pygame.image.load("assets/score/"+str(score1)+".png")
     
     if ball_x + ball.get_width() <= 0 or ball_x >= 1360:
         ball_x = 657
@@ -92,6 +96,8 @@ def draw():
     window.blit(ball, (ball_x, ball_y))
     window.blit(score1_img, (1360/2 - score1_img.get_width() - 50,50))
     window.blit(score2_img, (1360/2 + 50,50))
+    if score1 > 9 or score2 > 9:
+        window.blit(win_img, (1360/2 - win_img.get_width()/2, 700/2 - win_img.get_height()/2))
 
 loop = True
 while loop == True:
