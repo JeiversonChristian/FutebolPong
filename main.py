@@ -20,7 +20,8 @@ player2_y = 280
 ball = pygame.image.load("assets/ball.png")
 ball_x = 657
 ball_y = 327
-ball_dir = 1
+ball_dir_x = 1
+ball_dir_y = 1
 ball_vel = 10
 
 def move_player():
@@ -37,20 +38,29 @@ def move_player():
             player1_y = 700 - player1.get_height()
 
 
+def move_player2():
+     global player2_y
+     player2_y = ball_y
+
 def move_ball():
     global ball_x
     global ball_y
-    global ball_dir
+    global ball_dir_x
+    global ball_dir_y
 
     if ball_x + ball.get_width() >= player2_x:
-        if ball_y >= player2_y and ball_y <= player2_y + player2.get_height():
-            ball_dir *= -1
+        if ball_y + ball.get_height() >= player2_y and ball_y <= player2_y + player2.get_height():
+            ball_dir_x *= -1
     
     if ball_x <= player1_x + player1.get_width():
-        if ball_y >= player1_y and ball_y <= player1_y + player2.get_height():
-            ball_dir *= -1
+        if ball_y + ball.get_height() >= player1_y and ball_y <= player1_y + player2.get_height():
+            ball_dir_x *= -1
+
+    if ball_y + ball.get_height() >= 700 or ball_y <= 0:
+        ball_dir_y *= -1
     
-    ball_x += ball_vel*ball_dir
+    ball_x += ball_vel*ball_dir_x
+    ball_y += ball_vel*ball_dir_y
 
 def draw():
     window.blit(field, (0,0))
@@ -81,5 +91,5 @@ while loop == True:
     draw()
     move_ball()
     move_player()
-
+    move_player2()
     pygame.display.update()
