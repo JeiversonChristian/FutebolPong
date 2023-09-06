@@ -48,15 +48,21 @@ def move_ball():
     global ball_dir_x
     global ball_dir_y
 
-    if ball_x + ball.get_width() >= player2_x:
+    if ball_x + ball.get_width() >= player2_x and ball_x < player2_x + player2.get_width()/8 :
         if ball_y + ball.get_height() >= player2_y and ball_y <= player2_y + player2.get_height():
             ball_dir_x *= -1
     
-    if ball_x <= player1_x + player1.get_width():
+    if ball_x <= player1_x + player1.get_width() and ball_x >= player1_x + 7*player1.get_width()/8:
         if ball_y + ball.get_height() >= player1_y and ball_y <= player1_y + player2.get_height():
-            ball_dir_x *= -1
+            ball_dir_x *= -1 
 
     if ball_y + ball.get_height() >= 700 or ball_y <= 0:
+        ball_dir_y *= -1
+
+    if ball_x + ball.get_width() <= 0 or ball_x >= 1360:
+        ball_x = 657
+        ball_y = 327
+        ball_dir_x *= -1
         ball_dir_y *= -1
     
     ball_x += ball_vel*ball_dir_x
